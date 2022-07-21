@@ -6,20 +6,18 @@ const ToDoItem = (props) => {
     let className = 'list-group-item-light';
     let deleteButton = "";
     //console.log(task.user_id + ' ' + auth_id);
-    if ( parseInt(task.user_id) === parseInt(auth_id) ) {
-        if ( !task.completed ) {
-            checkButton = (
-                <button className={'btn btn-warning btn-sm'} onClick={event => checkTask(task.id)}>ОТМЕТИТЬ</button>
-            );
-        } else {
-            className = 'list-group-item-success';
-        }
-
+    if ( parseInt(task.user_id) === parseInt(auth_id) && !task.completed ) {
+        checkButton = (
+            <button className={'btn btn-warning btn-sm'} onClick={event => checkTask(task.id)}>ОТМЕТИТЬ</button>
+        );
     }
     if ( parseInt(task.author_id) === parseInt(auth_id) ) {
         deleteButton = (
             <button className={'btn btn-danger btn-sm'} onClick={event => deleteTask(task.id)}>УДАЛИТЬ</button>
         );
+    }
+    if ( task.completed ) {
+        className = 'list-group-item-success';
     }
     return (
         <li className={'list-group-item ' + className }>
